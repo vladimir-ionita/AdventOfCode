@@ -5,6 +5,9 @@ import collections
 input_file_path = "puzzle.in"
 file_input = FileUtilities.get_sanitized_content_from_file(input_file_path)
 
+# Sort
+file_input = sorted(file_input)
+
 
 timeline = []
 for i in file_input:
@@ -14,13 +17,11 @@ for i in file_input:
     date = datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
     timeline.append((date, instruction))
 
-t_ordered = sorted(timeline, key=lambda tup: tup[0])
-
 sleep = collections.defaultdict(int)
 g = 0
 s_start = None
 s_end = None
-for k, v in t_ordered:
+for k, v in timeline:
     if v.startswith("Guard"):
         g = v.split()[1]
         g = int(g[1:])
