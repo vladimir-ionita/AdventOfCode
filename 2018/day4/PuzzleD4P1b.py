@@ -27,14 +27,6 @@ for t in file_input:
         C[g] = t_sleep
 
 g, t_sleep = max(C.items(), key=lambda x: sum(x[1]))
+t_max = t_sleep.index(max(t_sleep))
 
-ts = list(C[g])
-max = 0
-max_m = 0
-for i in range(0, 60):
-    if max < ts[i]:
-        max = ts[i]
-        max_m = i
-
-print(max_m)
-print(g*max_m)
+print(g * t_max)
