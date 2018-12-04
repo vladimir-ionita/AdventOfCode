@@ -7,8 +7,7 @@ file_input = FileUtilities.get_sanitized_content_from_file(input_file_path)
 # Sort
 file_input = sorted(file_input)
 
-
-sleep = collections.defaultdict(int)
+C = collections.defaultdict(lambda: [0 for _ in range(60)])
 g = 0
 t_start = None
 for t in file_input:
@@ -23,15 +22,10 @@ for t in file_input:
         t_end = t[15:17]
         t_end = int(t_end)
 
-        time_asleep = []
-        if g in sleep:
-            time_asleep = sleep[g]
-        else:
-            time_asleep = [0 for x in range(60)]
-
+        t_sleep = C[g]
         for i in range(t_start, t_end):
-            time_asleep[i] += 1
-        sleep[g] = time_asleep
+            t_sleep[i] += 1
+        C[g] = t_sleep
 
 max = 0
 g = 0
@@ -40,7 +34,7 @@ for k, v in sleep.items():
         max = sum(v)
         g = k
 
-ts = list(sleep[g])
+ts = list(C[g])
 max = 0
 max_m = 0
 for i in range(0, 60):
