@@ -4,7 +4,6 @@ import collections
 input_file_path = "puzzle.in"
 file_input = FileUtilities.get_sanitized_content_from_file(input_file_path)
 
-# Sort
 file_input = sorted(file_input)
 
 C = collections.defaultdict(lambda: [0 for _ in range(60)])
@@ -27,12 +26,7 @@ for t in file_input:
             t_sleep[i] += 1
         C[g] = t_sleep
 
-max = 0
-g = 0
-for k, v in sleep.items():
-    if sum(v) > max:
-        max = sum(v)
-        g = k
+g, t_sleep = max(C.items(), key=lambda x: sum(x[1]))
 
 ts = list(C[g])
 max = 0
