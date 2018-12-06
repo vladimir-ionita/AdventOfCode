@@ -1,12 +1,12 @@
 from utilities import FileUtilities
 
-input_file_path = "puzzle.in"
-S = FileUtilities.get_sanitized_content_from_file(input_file_path)
-
 
 def get_distance(a, b):
     return abs(b[0]-a[0]) + abs(b[1] - a[1])
 
+
+input_file_path = "puzzle.in"
+S = FileUtilities.get_sanitized_content_from_file(input_file_path)
 
 coordinates = []
 for i in S:
@@ -16,9 +16,12 @@ for i in S:
 
 rows, _ = max(coordinates, key=lambda x: x[0])
 _, cols = max(coordinates, key=lambda x: x[1])
+
+# Add a border to the grid
 rows += 1
 cols += 1
 
+# Create the grid
 grid = [[-2 for _ in range(cols)] for _ in range(rows)]
 
 area = 0
