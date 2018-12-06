@@ -1,9 +1,6 @@
 from utilities import FileUtilities
 import collections
 
-input_file_path = "puzzle.in"
-S = FileUtilities.get_sanitized_content_from_file(input_file_path)
-
 
 def get_vertical_distance(c1, c2):
     return abs(c2[0] - c1[0])
@@ -26,6 +23,9 @@ def get_closest(c, coordinates):
     indices = [i for i, x in enumerate(results) if x == min_dist]
     return indices[0] if len(indices) == 1 else -1
 
+
+input_file_path = "puzzle.in"
+S = FileUtilities.get_sanitized_content_from_file(input_file_path)
 
 coordinates = []
 for i in S:
