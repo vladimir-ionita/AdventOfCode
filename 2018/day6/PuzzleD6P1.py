@@ -97,9 +97,6 @@ for i in range(rows):
         grid[i][j] = closest_point
         areas[closest_point] += 1
 
-# Get finite areas
-M1 = {}
-for c in finite:
-    M1[coordinates.index(c)] = M[coordinates.index(c)]
 
-print(max(M1.items(), key=lambda x: x[1]))
+finite_areas = {k: v for k, v in areas.items() if coordinates[k] in finite}
+print(max(finite_areas.items(), key=lambda x: x[1]))
