@@ -17,17 +17,14 @@ def get_distance(c1, c2):
     return abs(c2[0] - c1[0]) + abs(c2[1] - c1[1])
 
 
-def get_closest(point, list):
+def get_closest(c, coordinates):
     results = []
-    for p in list:
-        results.append(get_distance(p, point))
+    for c1 in coordinates:
+        results.append(get_distance(c, c1))
 
-    min_d = min(results)
-    indices = [i for i, x in enumerate(results) if x == min_d]
-    if len(indices) > 1:
-        return -1
-    else:
-        return indices[0]
+    min_dist = min(results)
+    indices = [i for i, x in enumerate(results) if x == min_dist]
+    return indices[0] if len(indices) == 1 else -1
 
 
 coordinates = []
