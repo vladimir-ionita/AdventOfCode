@@ -90,12 +90,12 @@ cols += 1
 # Create the grid
 grid = [[-2 for _ in range(cols)] for _ in range(rows)]
 
-M = collections.defaultdict(int)
+areas = collections.defaultdict(int)
 for i in range(rows):
     for j in range(cols):
         closest_point = get_closest((i, j),  coordinates)
         grid[i][j] = closest_point
-        M[closest_point] += 1
+        areas[closest_point] += 1
 
 # Get finite areas
 M1 = {}
