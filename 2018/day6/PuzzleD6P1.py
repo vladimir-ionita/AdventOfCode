@@ -61,31 +61,19 @@ for c in coordinates:
     the distance between the coordinate C and the projection of the point C1 on the axes,
     the point C1 area will block point C area from extending to infinite
     """
-    for c1 in q1:
-        if get_horizontal_distance(c, c1) < get_vertical_distance(c, c1):
-            continue
-    for c1 in q2:
+    for c1 in q1 + q2:
         if get_horizontal_distance(c, c1) < get_vertical_distance(c, c1):
             continue
 
-    for c1 in q2:
-        if get_vertical_distance(c, c1) < get_horizontal_distance(c, c1):
-            continue
-    for c1 in q3:
+    for c1 in q2 + q3:
         if get_vertical_distance(c, c1) < get_horizontal_distance(c, c1):
             continue
 
-    for c1 in q3:
-        if get_horizontal_distance(c, c1) < get_vertical_distance(c, c1):
-            continue
-    for c1 in q4:
+    for c1 in q3 + q4:
         if get_horizontal_distance(c, c1) < get_vertical_distance(c, c1):
             continue
 
-    for c1 in q4:
-        if get_vertical_distance(c, c1) < get_horizontal_distance(c, c1):
-            continue
-    for c1 in q1:
+    for c1 in q4 + q1:
         if get_vertical_distance(c, c1) < get_horizontal_distance(c, c1):
             continue
 
