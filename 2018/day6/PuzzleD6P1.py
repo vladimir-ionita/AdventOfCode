@@ -5,8 +5,8 @@ input_file_path = "puzzle.in"
 S = FileUtilities.get_sanitized_content_from_file(input_file_path)
 
 
-def get_distance(a, b):
-    return abs(b[0]-a[0]) + abs(b[1] - a[1])
+def get_distance(c1, c2):
+    return abs(c2[0] - c1[0]) + abs(c2[1] - c1[1])
 
 
 def get_closest(point, list):
