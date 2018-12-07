@@ -10,45 +10,43 @@ alpha = string.ascii_uppercase
 workers_max = 5
 time_per_step = 60
 
-M = collections.defaultdict(list)
-letters = set()
+steps = collections.defaultdict(list)
 for i in S:
     s = i[5]
     d = i[36]
-    M[d].append(s)
-    M[s]
+    steps[d].append(s)
+    steps[s]
 
 
-M = collections.OrderedDict(sorted(M.items()))
+steps = collections.OrderedDict(sorted(steps.items()))
 
-W = collections.defaultdict(int)
+workers = collections.defaultdict(int)
 time = 0
-while len(M.keys()) != 0 or len(W.keys()) != 0:
+while steps or workers:
     jobs_done = []
-    if len(W.items()) != 0:
+    if workers:
         time += 1
-    for k, v in W.items():
-        W[k] -= 1
-        if W[k] == 0:
+    for k, v in workers.items():
+        workers[k] -= 1
+        if workers[k] == 0:
             jobs_done.append(k)
-            for k1, v1 in M.items():
+            for k1, v1 in steps.items():
                 if k in v1:
-                    M[k1].remove(k)
+                    steps[k1].remove(k)
             continue
 
     for j in jobs_done:
-        W.pop(j)
+        workers.pop(j)
 
-    jobs = list({k for k, v in M.items() if len(v) == 0})
-    jobs.sort()
-    idle_workers = workers_max - len(W.keys())
-    max_jobs = min(idle_workers, len(jobs))
+    jobs_ready = list({k for k, v in steps.items() if len(v) == 0})
+    jobs_ready.sort()
+    idle_workers = workers_max - len(workers)
+    max_jobs = min(idle_workers, len(jobs_ready))
 
     for _ in range(max_jobs):
-        j = jobs[0]
-        W[j] = time_per_step + alpha.index(j) + 1
-        jobs.remove(j)
-        M.pop(j)
-
+        next_job = jobs_ready[0]
+        workers[next_job] = time_per_step + alpha.index(next_job) + 1
+        jobs_ready.remove(next_job)
+        steps.pop(next_job)
 
 print(time)
